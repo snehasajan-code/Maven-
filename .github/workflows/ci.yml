@@ -1,4 +1,3 @@
-# Matrix CI Workflow (.github/workflows/ci.yml)
 name: DevOps Java CI Automation Pipeline
 
 on:
@@ -8,6 +7,7 @@ on:
 jobs:
   build-and-validate:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         java-version: [17, 21]
@@ -20,8 +20,8 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: ${{ matrix.java-version }}
-          distribution: 'temurin'
-          cache: 'maven'
+          distribution: temurin
+          cache: maven
 
       - name: Run Automated Test Suites
-        run: mvn test
+        run: mvn clean package
